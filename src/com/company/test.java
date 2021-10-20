@@ -37,7 +37,7 @@ public class test {
         int largestNumber = bars[0];
 
 
-        for (int i = 0; i < bars.length-1; i++) {
+        for (int i = 0; i < bars.length - 1; i++) {
             if (bars[i] > largestNumber) {
                 largestNumber = bars[i];
 
@@ -94,15 +94,27 @@ public class test {
         int max1 = getIndexOfLargest(bars);
         int max2 = getIndexOfSecondLargest(bars);
         System.out.println("İndex of max:" + max1 + " index of second max: " + max2);
-
+        System.out.println("********************courrent array is***************");
+        for (int i = 0; i < bars.length; i++) {
+            System.out.println("bars[" + i + "]= " + bars[i]);
+        }
         if (max1 > max2) {
             for (int i = max1 - 1; i > max2; i--) {
                 water += bars[max2] - bars[i];
+                bars[i] += max2 - bars[i];
             }
         } else {
             for (int i = max1 + 1; i < max2; i++) {
                 water += bars[max2] - bars[i];
+                bars[i] += max2 - bars[i];
+
             }
+            bars[max1] = bars[max2];
+            countWater(bars);
+        }
+        System.out.println("İndex of max:" + max1 + " index of second max: " + max2);
+        for (int i = 0; i < bars.length; i++) {
+            System.out.println("bars[" + i + "]= " + bars[i]);
         }
 
         return water;
