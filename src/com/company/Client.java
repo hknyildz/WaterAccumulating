@@ -3,6 +3,7 @@ package com.company;
 public class Client {
 
 
+    static int water = 0;
 
     public int largest(int[] bars) {
 
@@ -61,7 +62,7 @@ public class Client {
 
     public int getIndexOfSecondLargest(int[] bars, int startIndex, int endIndex, int indexOfLargest) {
 
-        int largestNumber ;
+        int largestNumber;
         int secondLargestIndex;
 
         if (indexOfLargest == startIndex) {
@@ -84,34 +85,36 @@ public class Client {
 
     }
 
-    int water = 0;
     public int countWater(int[] bars, int startIndex, int endIndex) {
 
+        if (Math.abs(startIndex - endIndex) <= 1) {
+            return 0;
+        }
 
         int indexOfLargest = getIndexOfLargest(bars, startIndex, endIndex);
         int indexOfSecondLargest = getIndexOfSecondLargest(bars, startIndex, endIndex, indexOfLargest);
-        System.out.println("İndex of max:" + indexOfLargest + " index of second max: " + indexOfSecondLargest);
+        System.out.println("İndex of max:" + indexOfLargest + " index of second max: " + indexOfSecondLargest + " Current Water=" + water);
 
         if (indexOfLargest > indexOfSecondLargest) {
             for (int i = indexOfLargest - 1; i > indexOfSecondLargest; i--) {
                 water += bars[indexOfSecondLargest] - bars[i];
             }
-            water+=countWater(bars,startIndex,indexOfSecondLargest);
-
+            water += countWater(bars, startIndex, indexOfSecondLargest);
+            water += countWater(bars, indexOfLargest, endIndex);
         } else {
             for (int i = indexOfLargest + 1; i < indexOfSecondLargest; i++) {
                 water += bars[indexOfSecondLargest] - bars[i];
             }
-            water+=countWater(bars,indexOfSecondLargest,endIndex);
+            water += countWater(bars, startIndex, indexOfLargest);
+            water += countWater(bars, indexOfSecondLargest, endIndex);
 
         }
-
         return water;
     }
 
     public void showWater(int[] bars) {
         int water = countWater(bars, 0, bars.length - 1);
-        System.out.println("Needed waters amount is= "+water);
+        System.out.println("Needed waters amount is = " + water);
     }
 
 }
