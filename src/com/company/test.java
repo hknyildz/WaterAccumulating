@@ -32,14 +32,12 @@ public class test {
 
     public int getIndexOfSecondLargest(int[] bars) {
 
-        int secondLargestIndex = 1;
-
-        int i;
+        int secondLargestIndex = 0;
 
         int largestNumber = bars[0];
 
 
-        for (i = 1; i < bars.length; i++) {
+        for (int i = 0; i < bars.length-1; i++) {
             if (bars[i] > largestNumber) {
                 largestNumber = bars[i];
 
@@ -77,19 +75,16 @@ public class test {
 
     public int getIndexOfLargest(int[] bars) {
 
-        int i;
 
         int max = bars[0];
-        int largestIndex = 1;
+        int largestIndex = 0;
 
-        for (i = 1; i < bars.length; i++) {
+        for (int i = 1; i < bars.length; i++) {
             if (bars[i] > max) {
                 max = bars[i];
                 largestIndex = i;
             }
         }
-
-
         return largestIndex;
     }
 
@@ -101,11 +96,14 @@ public class test {
         System.out.println("İndex of max:" + max1 + " index of second max: " + max2);
 
         if (max1 > max2) {
-            for (int i = max1; i > max2; i--) {
+            for (int i = max1 - 1; i > max2; i--) {
+                water += bars[max2] - bars[i];
+            }
+        } else {
+            for (int i = max1 + 1; i < max2; i++) {
                 water += bars[max2] - bars[i];
             }
         }
-
 
         return water;
     }
