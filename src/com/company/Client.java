@@ -50,7 +50,7 @@ public class Client {
         int largestNumber = bars[startIndex];
         int largestIndex = startIndex;
 
-        for (int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i <= endIndex; i++) {
             if (bars[i] > largestNumber) {
                 largestNumber = bars[i];
                 largestIndex = i;
@@ -61,8 +61,8 @@ public class Client {
 
     public int getIndexOfSecondLargest(int[] bars, int startIndex, int endIndex, int indexOfLargest) {
 
-        int largestNumber = bars[0];
-        int secondLargestIndex = 0;
+        int largestNumber ;
+        int secondLargestIndex;
 
         if (indexOfLargest == startIndex) {
             largestNumber = bars[startIndex + 1];
@@ -72,7 +72,7 @@ public class Client {
             secondLargestIndex = startIndex;
         }
 
-        for (int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i <= endIndex; i++) {
             if (i == indexOfLargest) {
                 continue;
             } else if (bars[i] > largestNumber) {
@@ -102,7 +102,7 @@ public class Client {
             for (int i = indexOfLargest + 1; i < indexOfSecondLargest; i++) {
                 water += bars[indexOfSecondLargest] - bars[i];
             }
-            water+=countWater(bars,startIndex,indexOfLargest);
+            water+=countWater(bars,indexOfSecondLargest,endIndex);
 
         }
 
