@@ -3,50 +3,6 @@ package com.company;
 public class Client {
 
 
-    static int water = 0;
-
-    public int largest(int[] bars) {
-
-        int i;
-
-        int max = bars[0];
-
-        for (i = 1; i < bars.length; i++) {
-            if (bars[i] > max) {
-                max = bars[i];
-
-            }
-        }
-        return max;
-    }
-
-    public int getSecondLargest(int[] bars) {
-
-        int secondLargestIndex = 1;
-
-        int i;
-
-        int largestNumber = bars[0];
-
-        for (i = 1; i < bars.length; i++) {
-            if (bars[i] > largestNumber) {
-                largestNumber = bars[i];
-            }
-        }
-        System.out.println(largestNumber);
-        int secondLargestNumber = 0;
-
-        for (int k = 0; k < bars.length; k++) {
-            for (int j = k + 1; j < bars.length; j++) {
-                if (bars[k] > bars[j] && bars[k] < largestNumber && bars[k] > secondLargestNumber) {
-                    secondLargestNumber = bars[k];
-                    k = secondLargestIndex;
-                }
-            }
-        }
-        return secondLargestNumber;
-    }
-
     public int getIndexOfLargest(int[] bars, int startIndex, int endIndex) {
         int largestNumber = bars[startIndex];
         int largestIndex = startIndex;
@@ -75,7 +31,7 @@ public class Client {
 
         for (int i = startIndex; i <= endIndex; i++) {
             if (i == indexOfLargest) {
-                continue;
+
             } else if (bars[i] > largestNumber) {
                 largestNumber = bars[i];
                 secondLargestIndex = i;
@@ -90,10 +46,9 @@ public class Client {
         if (Math.abs(startIndex - endIndex) <= 1) {
             return 0;
         }
-
+        int water = 0;
         int indexOfLargest = getIndexOfLargest(bars, startIndex, endIndex);
         int indexOfSecondLargest = getIndexOfSecondLargest(bars, startIndex, endIndex, indexOfLargest);
-        System.out.println("İndex of max:" + indexOfLargest + " index of second max: " + indexOfSecondLargest + " Current Water=" + water);
 
         if (indexOfLargest > indexOfSecondLargest) {
             for (int i = indexOfLargest - 1; i > indexOfSecondLargest; i--) {
@@ -112,9 +67,8 @@ public class Client {
         return water;
     }
 
-    public void showWater(int[] bars) {
-        int water = countWater(bars, 0, bars.length - 1);
-        System.out.println("Needed waters amount is = " + water);
+    public int getNeededWater(int[] bars) {
+        return countWater(bars, 0, bars.length - 1);
     }
 
 }
